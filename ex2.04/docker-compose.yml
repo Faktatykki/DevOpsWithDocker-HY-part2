@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-    ex23-back:
+    ex24-back:
       ports:
         - 8080:8080
       container_name: ex24-back
@@ -9,7 +9,7 @@ services:
         context: ./material-applications/example-backend
       environment:
         - REDIS_HOST=redis
-    ex23-front:
+    ex24-front:
       ports:
         - 5000:5000
       container_name: ex24-front
