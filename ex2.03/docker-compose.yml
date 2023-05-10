@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+    ex23-back:
+      ports:
+        - 8080:8080
+      container_name: ex23-back
+      build:
+        context: ./material-applications/example-backend
+      
+    ex23-front:
+      ports:
+        - 5000:5000
+      container_name: ex23-front
+      build:
+        context: ./material-applications/example-frontend
+
+#git clone https://github.com/docker-hy/material-applications.git
+#cp front/Dockerfile material-applications/example-frontend
+#cp back/Dockerfile material-applications/example-backend
+#docker compose up
