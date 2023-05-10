@@ -7,11 +7,15 @@ Removed environment variables from Dockerfiles and moved variables to docker-com
 Backend environment added:
 
 environment:
+
     ..
+
   - REQUEST_ORIGIN=http://localhost
 
 Frontend environment added:
 
 environment:
+
     ..
+
   - REACT_APP_BACKEND_URL=http://localhost/api
