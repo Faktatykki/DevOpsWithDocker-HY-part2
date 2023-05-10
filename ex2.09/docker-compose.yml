@@ -18,8 +18,6 @@ services:
 
     db_ex29:
       image: postgres
-      ports:
-        - 5432:5432
       restart: unless-stopped
       environment:
         POSTGRES_PASSWORD: postgres

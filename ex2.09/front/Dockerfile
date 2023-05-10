@@ -16,4 +16,6 @@ RUN npm run build
 
 RUN npm install -g serve
 
+ENV REACT_APP_BACKEND_URL=http://localhost/api
+
 CMD [ "serve", "-s", "-l", "5000", "build" ]

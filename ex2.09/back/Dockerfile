@@ -8,4 +8,6 @@ COPY . .
 
 RUN go build 
 
+ENV REQUEST_ORIGIN=http://localhost
+
 CMD [ "./server" ]
