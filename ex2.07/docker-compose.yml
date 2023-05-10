@@ -10,7 +10,9 @@ services:
         POSTGRES_PASSWORD: postgres
       container_name: db_ex27
       volumes:
-        - database:/var/lib/postgresql/data
+        - type: bind
+          source: ./database
+          target: /var/lib/postgresql/data
 
     ex27-back:
       ports:
