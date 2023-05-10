@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+    db_ex27:
+      image: postgres
+      ports:
+        - 5432:5432
+      restart: unless-stopped
+      environment:
+        POSTGRES_PASSWORD: postgres
+      container_name: db_ex27
+      volumes:
+        - database:/var/lib/postgresql/data
+
+    ex27-back:
+      ports:
+        - 8080:8080
+      container_name: ex27-back
+      build:
+        context: ./material-applications/example-backend
+      environment:
+        - REDIS_HOST=redis
+        - POSTGRES_HOST=db_ex27
+    
+    ex27-front:
+      ports:
+        - 5000:5000
+      container_name: ex27-front
+      build:
+        context: ./material-applications/example-frontend
+     
+    redis:
+      image: redis
+      ports:
+        - 6379:6379
+      container_name: redis_ex27
+      
+volumes:
+  database:
+
+#git clone https://github.com/docker-hy/material-applications.git
+#cp front/Dockerfile material-applications/example-frontend
+#cp back/Dockerfile material-applications/example-backend
+#docker compose up
