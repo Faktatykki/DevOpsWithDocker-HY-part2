@@ -58,4 +58,5 @@ volumes:
 #git clone https://github.com/docker-hy/material-applications.git
 #cp front/Dockerfile material-applications/example-frontend
 #cp back/Dockerfile material-applications/example-backend
+#mkdir database
 #docker compose up
