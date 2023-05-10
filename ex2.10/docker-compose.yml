@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+    nginx_ex210:
+      image: nginx
+      volumes:
+        - type: bind
+          source: ./nginx.conf
+          target: /etc/nginx/nginx.conf
+      ports:
+        - "80:80"
+      environment:
+        - NGINX_HOST=http://localhost
+        - NGINX_PORT=80
+      depends_on:
+        - backend
+        - frontend
+      networks:
+        - proxy-network
+
+    db_ex210:
+      image: postgres
+      restart: unless-stopped
+      environment:
+        POSTGRES_PASSWORD: postgres
+      container_name: db_ex210
+      volumes:
+        - type: bind
+          source: ./database
+          target: /var/lib/postgresql/data
+      networks:
+        - proxy-network
+
+    backend:
+      container_name: ex210-backend
+      build:
+        context: ./material-applications/example-backend
+      environment:
+        - REDIS_HOST=redis
+        - POSTGRES_HOST=db_ex210
+        - REQUEST_ORIGIN=http://localhost
+      networks:
+        - proxy-network
+
+    frontend:
+      container_name: ex210-frontend
+      build:
+        context: ./material-applications/example-frontend
+      environment:
+        - REACT_APP_BACKEND_URL=http://localhost/api
+      networks:
+        - proxy-network
+
+    redis:
+      image: redis
+      container_name: redis_ex210
+      networks:
+        - proxy-network
+      
+volumes:
+  database:
+
+networks:
+  proxy-network:
+
+#git clone https://github.com/docker-hy/material-applications.git
+#cp front/Dockerfile material-applications/example-frontend
+#cp back/Dockerfile material-applications/example-backend
+#mkdir database
+#docker compose up
